@@ -1,12 +1,17 @@
 import 'dotenv/config';
+import Cors from 'micro-cors';
 
-import dbConnect from '../../utils/mongodb';
-import UserScore from '../../models/UserScore';
+import dbConnect from '../../utils/mongodb.js';
+import UserScore from '../../models/UserScore.js';
 
 require('dotenv').config();
 
+const cors = Cors({
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+});
 
-export default async function handler(req, res) {
+
+async function handler(req, res) {
     await dbConnect();
 
     if (req.method === 'POST') {
@@ -23,3 +28,6 @@ export default async function handler(req, res) {
         res.status(400).json({ error: 'Method not supported' });
     }
 }
+
+
+export default cors(handler);

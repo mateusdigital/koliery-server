@@ -1,11 +1,16 @@
 import 'dotenv/config';
+import Cors from 'micro-cors';
 
 import dbConnect from '../../utils/mongodb.js';
 import UserScore from '../../models/UserScore.js';
 
 require('dotenv').config();
 
-export default async function handler(req, res) {
+const cors = Cors({
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+});
+
+async function handler(req, res) {
     await dbConnect();
 
     try {
@@ -16,3 +21,5 @@ export default async function handler(req, res) {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export default cors(handler);
