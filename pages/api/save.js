@@ -21,23 +21,16 @@ async function handler(req, res) {
             const {name, score} = req.body;
             const userScore = new UserScore({name, score});
             await userScore.save();
-
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Content-Type', 'application/json');
-            res.setHeader('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
-
             res.status(201).json({ success: true, data: userScore });
         } catch (error) {
             console.error('Error saving data:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
     } else if (req.method == "OPTIONS") {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
-        res.status(200);
+        res.status(200).end();
     }
 }
 
 
-export default cors(handler);
+// export default cors(handler);
+export default handler;
