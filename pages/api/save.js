@@ -15,10 +15,10 @@ async function handler(req, res) {
     await dbConnect();
 
     if (req.method === 'OPTIONS') {
-        return res.status(200).end();
+        res.status(200).end();
     }
 
-    if (req.method === 'POST') {
+    else if (req.method === 'POST') {
         try {
             const {name, score} = req.body;
             const userScore = new UserScore({name, score});
@@ -28,7 +28,9 @@ async function handler(req, res) {
             console.error('Error saving data:', error);
             res.status(500).json({ error: error });
         }
-    } else {
+    }
+
+    else {
         res.status(400).json({ error: 'Method not supported' });
     }
 }
