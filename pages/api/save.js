@@ -31,7 +31,7 @@ async function handler(req, res) {
             console.error('Error saving data:', error);
             res.status(500).json({ error: 'Internal server error' });
         }
-    } else (req.method == "OPTIONS") {
+    } else if (req.method == "OPTIONS") {
         res.status(200);
     }
 }
