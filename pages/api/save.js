@@ -32,6 +32,9 @@ async function handler(req, res) {
             res.status(500).json({ error: 'Internal server error' });
         }
     } else if (req.method == "OPTIONS") {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
         res.status(200);
     }
 }
