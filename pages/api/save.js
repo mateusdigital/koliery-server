@@ -21,6 +21,9 @@ async function handler(req, res) {
             await userScore.save();
 
             res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
+
             res.status(201).json({ success: true, data: userScore });
         } catch (error) {
             console.error('Error saving data:', error);
