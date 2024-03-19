@@ -15,6 +15,7 @@ async function handler(req, res) {
     await dbConnect();
 
     if (req.method === 'OPTIONS') {
+        res.setHeader("Allow", "POST");
         res.status(200).end();
     }
 
@@ -26,7 +27,7 @@ async function handler(req, res) {
             res.status(201).json({ success: true, data: userScore });
         } catch (error) {
             console.error('Error saving data:', error);
-            res.status(500).json({ error: error });
+            res.status(404).json({ error: error });
         }
     }
 
