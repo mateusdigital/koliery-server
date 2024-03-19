@@ -14,7 +14,10 @@ async function handler(req, res) {
     await dbConnect();
 
     try {
-        const scores = await UserScore.find({});
+        const scores = await UserScore.find({}).sort({ score: -1 }).limit(10);
+
+        res.setHeader('Access-Control-Allow-Origin', '*');
+
         res.status(200).json(scores);
     } catch (error) {
         console.error('Error fetching data:', error);

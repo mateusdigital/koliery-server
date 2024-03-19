@@ -19,6 +19,8 @@ async function handler(req, res) {
             const {name, score} = req.body;
             const userScore = new UserScore({name, score});
             await userScore.save();
+
+            res.setHeader('Access-Control-Allow-Origin', '*');
             res.status(201).json({ success: true, data: userScore });
         } catch (error) {
             console.error('Error saving data:', error);
