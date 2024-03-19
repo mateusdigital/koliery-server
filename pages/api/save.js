@@ -21,13 +21,13 @@ async function handler(req, res) {
 
     else if (req.method === 'POST') {
         try {
-            const {name, score} = req.body;
+            const {name, score} = JSON.parse(req.body);
             const userScore = new UserScore({name, score});
             await userScore.save();
             res.status(201).json({ success: true, data: userScore });
         } catch (error) {
             console.error('Error saving data:', error);
-            res.status(404).json({ error: error });
+            res.status(500).json({ error: error });
         }
     }
 
