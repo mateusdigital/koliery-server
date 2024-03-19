@@ -8,6 +8,8 @@ require('dotenv').config();
 
 const cors = Cors({
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: '*',
+    methods: ['POST', 'PATCH', 'OPTIONS'],
 });
 
 
